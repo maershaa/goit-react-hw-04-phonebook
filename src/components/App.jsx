@@ -5,25 +5,24 @@ import Filter from './Filter/Filter';
 import css from './App.module.css';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]); // Состояние для хранения контактов
-  const [filter, setFilter] = useState(''); // Состояние для хранения значения фильтрации
+  // Задаємо стан для фільтрації контактів
+  const [filter, setFilter] = useState('');
 
-  // !!!Совет ментора но я что-то делаю не так
-  // const [contacts, setContacts] = useState(() => {
-  //   const stringifiedContacts = localStorage.getItem('contacts');
-  //   const parsedContacts = JSON.parse(stringifiedContacts) || [];
-  // });
-
-  // Загрузка данных из localStorage при монтировании компонента
-  useEffect(() => {
+  // Використовуємо функцію для ініціалізації початкового стану контактів з localStorage
+  const [contacts, setContacts] = useState(() => {
+    // Отримуємо рядкове представлення контактів з localStorage
     const stringifiedContacts = localStorage.getItem('contacts');
+    // Розпаковуємо рядок у масив об'єктів контактів або створюємо порожній масив, якщо дані відсутні
     const parsedContacts = JSON.parse(stringifiedContacts) || [];
-    setContacts(parsedContacts);
-  }, []);
+    // Повертаємо дані для ініціалізації стану
+    return parsedContacts;
+  });
 
-  // Сохранение данных в localStorage при изменении контактов
+  // Використовуємо ефект для збереження контактів в localStorage при їх зміні
   useEffect(() => {
+    // Перетворюємо масив контактів у рядкове представлення
     const stringifiedContacts = JSON.stringify(contacts);
+    // Зберігаємо рядок контактів в localStorage
     localStorage.setItem('contacts', stringifiedContacts);
   }, [contacts]);
 
