@@ -1,27 +1,22 @@
-import React from "react";
+import React from 'react';
 import css from 'components/Contacts/Contacts.module.css';
-
+import Contact from 'components/Contacts/Contact/Contact';
 export const ContactsList = ({ contacts, onDeleteContact }) => {
-
-    return (
-<div className={css.contactsContainer}>
-  <ul className={css.contactsList}>
-    {contacts.map(contact => (
-        <li key={contact.id} className={css.item}>
-          {/* Отображаем имя и номер контакта */}
-          {contact.name}: {contact.number}
-
-          {/* Кнопка "Удалить" с вызовом функцию onDeleteContact с contact.id в качестве аргумента при клике на кнопку */}
-          <button onClick={() => onDeleteContact(contact.id)}  className={css.deleteButton}>
-            Delete
-          </button>
-        </li>
-      ))}
-  </ul>
-</div>
-    );
-}
-
-
+  return (
+    <div className={css.contactsContainer}>
+      <ul className={css.contactsList}>
+        {contacts.map(contact => (
+          <Contact
+            key={contact.id}
+            id={contact.id}
+            name={contact.name}
+            number={contact.number}
+            onDeleteContact={onDeleteContact}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default ContactsList;
