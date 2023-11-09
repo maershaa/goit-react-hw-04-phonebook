@@ -8,6 +8,12 @@ const App = () => {
   const [contacts, setContacts] = useState([]); // Состояние для хранения контактов
   const [filter, setFilter] = useState(''); // Состояние для хранения значения фильтрации
 
+  // !!!Совет ментора но я что-то делаю не так
+  // const [contacts, setContacts] = useState(() => {
+  //   const stringifiedContacts = localStorage.getItem('contacts');
+  //   const parsedContacts = JSON.parse(stringifiedContacts) || [];
+  // });
+
   // Загрузка данных из localStorage при монтировании компонента
   useEffect(() => {
     const stringifiedContacts = localStorage.getItem('contacts');
